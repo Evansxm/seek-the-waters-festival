@@ -543,7 +543,7 @@ img {
 
 .about-stats {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 20px;
 }
 
@@ -699,6 +699,7 @@ img {
   position: absolute;
   top: 20px;
   right: 30px;
+  z-index: 2;
   color: #fff;
   font-size: 2.5rem;
   cursor: pointer;
@@ -717,6 +718,7 @@ img {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  z-index: 1;
   color: #fff;
   font-size: 2.5rem;
   cursor: pointer;
@@ -1217,10 +1219,6 @@ img {
 
   .contact-grid {
     grid-template-columns: 1fr;
-  }
-
-  .about-stats {
-    grid-template-columns: 1fr 1fr;
   }
 
   .section {

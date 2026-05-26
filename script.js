@@ -84,12 +84,6 @@ document.addEventListener('DOMContentLoaded', function() {
     revealObserver.observe(el);
   });
 
-  /* GALLERY STAGGER */
-  var galleryImgs = document.querySelectorAll('.gallery-grid img');
-  galleryImgs.forEach(function(img, index) {
-    img.dataset.delay = index * 60;
-  });
-
   /* PILLAR CARD STAGGER */
   var pillarCards = document.querySelectorAll('.pillar-card');
   pillarCards.forEach(function(card, index) {
@@ -107,10 +101,10 @@ document.addEventListener('DOMContentLoaded', function() {
   var lightbox = document.createElement('div');
   lightbox.className = 'lightbox';
   lightbox.innerHTML =
-    '<button class="lightbox-close">&times;</button>' +
-    '<button class="lightbox-nav lightbox-prev">&#8249;</button>' +
     '<img src="" alt="Gallery image">' +
-    '<button class="lightbox-nav lightbox-next">&#8250;</button>';
+    '<button type="button" class="lightbox-close">&times;</button>' +
+    '<button type="button" class="lightbox-nav lightbox-prev">&#8249;</button>' +
+    '<button type="button" class="lightbox-nav lightbox-next">&#8250;</button>';
   document.body.appendChild(lightbox);
 
   var lightboxImg = lightbox.querySelector('img');
@@ -126,12 +120,16 @@ document.addEventListener('DOMContentLoaded', function() {
       img.alt = 'Seek The Waters Festival';
       img.loading = 'lazy';
       img.dataset.index = i;
+      img.dataset.delay = i * 60;
       img.addEventListener('click', function() {
         currentIndex = parseInt(this.dataset.index);
         lightboxImg.src = this.src;
         lightbox.classList.add('active');
       });
       galleryGrid.appendChild(img);
+      // Add to scroll reveal observer
+      img.classList.add('reveal');
+      revealObserver.observe(img);
     });
   }
 
@@ -242,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
             if (successMsg) successMsg.classList.remove('visible');
-          }, 5000);
+          }, 10000);
         } else {
           throw new Error(result.message || 'Submission failed');
         }
